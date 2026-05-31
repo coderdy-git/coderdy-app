@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 import { initDB, addAttendance, getUnsyncedAttendances, markAsSynced, getLastAttendance, getAttendances, insertPulledAttendance, clearDB } from './db.js';
 
-const SUPABASE_URL = 'https://bvpbwfeitnttzwuyzjrp.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2cGJ3ZmVpdG50dHp3dXl6anJwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyNzQzOTgsImV4cCI6MjA5NDg1MDM5OH0.CF436HHng-9TZCdLK4A0Veu4lsY1NsoIdjpdFEOUQbw';
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {
