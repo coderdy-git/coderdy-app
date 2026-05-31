@@ -874,6 +874,24 @@ document.addEventListener('DOMContentLoaded', () => {
         devDummyBtn?.classList.add('hidden');
       }
       
+      // Role Badge Check
+      const roleBadge = document.getElementById('header-role-badge');
+      if (roleBadge) {
+        if (user.email === 'admin.coderdy@gmail.com') {
+          roleBadge.textContent = 'DEVELOPER';
+          roleBadge.style.backgroundColor = '#dbeafe';
+          roleBadge.style.color = '#1e3a8a';
+          roleBadge.classList.remove('hidden');
+        } else if (user.email && user.email.toLowerCase().includes('tester')) {
+          roleBadge.textContent = 'TESTER';
+          roleBadge.style.backgroundColor = '#fce7f3'; // light pink
+          roleBadge.style.color = '#9d174d'; // dark pink
+          roleBadge.classList.remove('hidden');
+        } else {
+          roleBadge.classList.add('hidden');
+        }
+      }
+      
       // Check for existing passkeys
       if (window.PublicKeyCredential && supabase.auth.passkey) {
         supabase.auth.passkey.list().then(({ data, error }) => {
