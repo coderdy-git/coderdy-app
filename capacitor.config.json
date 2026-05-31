@@ -1,0 +1,10 @@
+{
+  "appId": "com.example.blankapp",
+  "appName": "Blank App",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    }
+  }
+}
