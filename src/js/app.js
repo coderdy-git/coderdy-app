@@ -1,11 +1,30 @@
 import { AuthService, AttendanceService, UserService, NotificationService, ProfileService, DebtService, StaffService } from './api.js';
 import { initDB, addAttendance, getUnsyncedAttendances, markAsSynced, getLastAttendance, getAttendances, insertPulledAttendance, clearDB, addDebt, getDebts, getUnsyncedDebts, markDebtAsSynced, insertPulledDebt, markDebtAsPaidLocal, addStaff, getStaffs, updateStaffDepositLocal, updateStaffWaLocal, updateStaffNameLocal, getUnsyncedStaffs, markStaffAsSynced, insertPulledStaff } from './db.js';
+import { App } from '@capacitor/app';
+import { supabase } from './api.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const googleBtn = document.getElementById('google-btn');
   const btnText = googleBtn.querySelector('span');
   const spinner = googleBtn.querySelector('.spinner');
   const messageBox = document.getElementById('message-box');
+  
+  if (window.Capacitor && window.Capacitor.isNativePlatform()) {
+    App.addListener('appUrlOpen', (event) => {
+      const url = event.url;
+      if (url.startsWith('com.coderdy.app://')) {
+        const params = new URL(url).hash.substring(1);
+        const queryParams = new URLSearchParams(params);
+        if (queryParams.has('access_token')) {
+          const accessToken = queryParams.get('access_token');
+          const refreshToken = queryParams.get('refresh_token');
+          if (accessToken && refreshToken) {
+             supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
+          }
+        }
+      }
+    });
+  }
   
   const passkeyLoginBtn = document.getElementById('passkey-login-btn');
   const passkeyLoginBtnText = passkeyLoginBtn.querySelector('span');

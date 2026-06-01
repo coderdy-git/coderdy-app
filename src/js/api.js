@@ -18,10 +18,11 @@ export const AuthService = {
     return supabase.auth.onAuthStateChange(callback);
   },
   async signInWithOAuth() {
+    const isNative = window.Capacitor && window.Capacitor.isNativePlatform();
     return await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.origin,
+        redirectTo: isNative ? 'com.coderdy.app://login-callback' : window.location.origin,
         queryParams: { prompt: 'select_account' }
       }
     });
