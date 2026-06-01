@@ -1,6 +1,6 @@
 {
-  "appId": "com.example.blankapp",
-  "appName": "Blank App",
+  "appId": "com.coderdy.app",
+  "appName": "CODERDY",
   "webDir": "dist",
   "plugins": {
     "SplashScreen": {

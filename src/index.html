@@ -57,9 +57,9 @@
             <span id="header-role-badge" class="hidden" style="font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px; text-transform: uppercase;"></span>
           </div>
           <div class="user-profile">
-            <div class="avatar" id="profile-btn" style="cursor: pointer;">
-              <svg id="default-avatar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              <img id="user-avatar" src="" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: none;">
+            <div class="notification-btn" id="notification-btn" style="cursor: pointer; position: relative; width: 40px; height: 40px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; transition: all 0.3s ease;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+              <span style="position: absolute; top: 8px; right: 9px; width: 8px; height: 8px; background-color: #ef4444; border-radius: 50%; border: 2px solid white; display: none;"></span>
             </div>
           </div>
         </header>
@@ -80,6 +80,13 @@
               <span class="menu-label">Attendance</span>
             </div>
 
+            <div class="menu-item" id="debt-btn">
+              <div class="menu-icon-btn" style="color: #f59e0b; background: linear-gradient(135deg, #fef3c7, #fde68a);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 26px; height: 26px;"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+              <span class="menu-label">Piutang</span>
+            </div>
+
           </div>
 
           <!-- Recent Activity -->
@@ -89,7 +96,7 @@
               <span style="font-size: 12px; color: var(--primary); font-weight: 600; cursor: pointer;">See All</span>
             </div>
             
-            <div class="recent-list" id="recent-activity-list">
+            <div class="recent-list" id="recent-activity-list" style="max-height: 350px; overflow-y: auto; padding-right: 5px;">
               <!-- Dynamic content will be injected here -->
             </div>
           </div>
@@ -114,7 +121,12 @@
           <h3 id="profile-name" style="font-size: 22px; color: #1e293b; margin-bottom: 5px;">User Name</h3>
           <p id="profile-email" style="font-size: 15px; color: #64748b; margin-bottom: 10px;">user@email.com</p>
           
-          <button id="register-passkey-btn" style="display: flex; align-items: center; justify-content: center; width: 100%; max-width: 300px; padding: 15px; background: #0f172a; color: white; border: none; border-radius: 18px; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.2s ease; margin-top: 30px; -webkit-tap-highlight-color: transparent;">
+          <button id="detail-company-btn" class="hidden" style="align-items: center; justify-content: center; width: 100%; max-width: 300px; padding: 15px; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 18px; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); transition: all 0.2s ease; margin-top: 20px; -webkit-tap-highlight-color: transparent;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; margin-right: 10px;"><path d="M3 21h18"></path><path d="M9 8h1"></path><path d="M9 12h1"></path><path d="M9 16h1"></path><path d="M14 8h1"></path><path d="M14 12h1"></path><path d="M14 16h1"></path><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path></svg>
+            Detail Company
+          </button>
+
+          <button id="register-passkey-btn" style="display: flex; align-items: center; justify-content: center; width: 100%; max-width: 300px; padding: 15px; background: #0f172a; color: white; border: none; border-radius: 18px; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.2s ease; margin-top: 15px; -webkit-tap-highlight-color: transparent;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; margin-right: 10px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
             Register Passkey
           </button>
@@ -132,6 +144,34 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; margin-right: 10px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
             [Dev] Generate 50 Dummy Records
           </button>
+        </div>
+      </div>
+      
+      <!-- Company Panel (Hidden initially) -->
+      <div class="dashboard-wrapper hidden" id="company-panel">
+        <header class="dash-header" style="border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; margin-bottom: 15px;">
+          <button id="back-from-company" style="background: none; border: none; cursor: pointer; color: #1e293b; display: flex; align-items: center; padding: 5px; -webkit-tap-highlight-color: transparent;">
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          </button>
+          <h2 style="font-weight: bold; font-size: 18px; color: #1e293b;">Company Details</h2>
+          <div style="width: 34px;"></div>
+        </header>
+
+        <div class="dash-content">
+          <div style="background: white; border-radius: 16px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+            <div style="margin-bottom: 15px;">
+              <label style="display: block; font-size: 13px; font-weight: 600; color: #94a3b8; margin-bottom: 5px;">Company Name</label>
+              <div id="company-detail-name" style="font-size: 16px; font-weight: 600; color: #1e293b;">-</div>
+            </div>
+            <div style="margin-bottom: 15px;">
+              <label style="display: block; font-size: 13px; font-weight: 600; color: #94a3b8; margin-bottom: 5px;">Department</label>
+              <div id="company-detail-dept" style="font-size: 16px; font-weight: 600; color: #1e293b;">-</div>
+            </div>
+            <div>
+              <label style="display: block; font-size: 13px; font-weight: 600; color: #94a3b8; margin-bottom: 5px;">Job Title</label>
+              <div id="company-detail-title" style="font-size: 16px; font-weight: 600; color: #1e293b;">-</div>
+            </div>
+          </div>
         </div>
       </div>
       
@@ -175,6 +215,59 @@
         </div>
       </div>
 
+      <!-- Debt Detail View (Hidden initially) -->
+      <div class="dashboard-wrapper hidden" id="debt-detail-panel">
+        <header class="dash-header" style="border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between;">
+          <button id="back-from-debt-detail" style="background: none; border: none; cursor: pointer; color: #1e293b; display: flex; align-items: center; padding: 5px; -webkit-tap-highlight-color: transparent;">
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          </button>
+          <h2 id="debt-detail-title" style="font-weight: bold; font-size: 18px; color: #1e293b; flex-grow: 1; text-align: center;">Rincian Hutang</h2>
+          <a id="wa-share-btn" href="#" target="_blank" style="background: #25D366; color: white; border: none; border-radius: 8px; padding: 6px 12px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 13px; font-weight: 600; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 5px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            Share
+          </a>
+        </header>
+
+        <div class="dash-content">
+          <div style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); overflow: hidden;">
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <thead style="background: #f1f5f9; border-bottom: 2px solid #e2e8f0;">
+                  <tr>
+                    <th style="padding: 12px 15px; font-size: 13px; font-weight: 700; color: #475569; border-bottom: 2px solid #e2e8f0;">Tanggal</th>
+                    <th style="padding: 12px 15px; font-size: 13px; font-weight: 700; color: #475569; border-bottom: 2px solid #e2e8f0;">Keterangan</th>
+                    <th style="padding: 12px 15px; font-size: 13px; font-weight: 700; color: #475569; border-bottom: 2px solid #e2e8f0; text-align: right;">Jumlah</th>
+                  </tr>
+                </thead>
+                <tbody id="debt-detail-tbody">
+                  <!-- Injected by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Summary & Pay Button -->
+          <div style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); padding: 20px; margin-top: 15px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; color: #64748b;">
+              <span>Total Hutang:</span>
+              <span id="detail-total-hutang" style="font-weight: 600; color: #ef4444;">Rp 0</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; color: #64748b;">
+              <span>Total Deposit:</span>
+              <span id="detail-total-deposit" style="font-weight: 600; color: #10b981;">Rp 0</span>
+            </div>
+            <div style="height: 1px; background: #e2e8f0; margin: 10px 0;"></div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 15px; color: #1e293b; font-weight: 700;">
+              <span id="detail-sisa-label">Sisa Hutang:</span>
+              <span id="detail-sisa-amount">Rp 0</span>
+            </div>
+            <button id="pay-all-debt-btn" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
+              Bayar Lunas
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- Attendance View (Hidden initially) -->
       <div class="dashboard-wrapper hidden" id="attendance-panel">
         <header class="dash-header">
@@ -202,6 +295,70 @@
                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 45px; height: 45px; margin-bottom: 8px;"><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M2 16h.01"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/><path d="M8.65 22c.21-.66.45-1.32.57-2"/><path d="M9 6.8a6 6 0 0 1 9 5.2v2"/></svg>
                <span style="font-size: 18px; font-weight: 700;">Check In</span>
             </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notification View (Hidden initially) -->
+      <div class="dashboard-wrapper hidden" id="notification-panel">
+        <header class="dash-header" style="border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; margin-bottom: 15px;">
+          <button id="back-from-notification" style="background: none; border: none; cursor: pointer; color: #1e293b; display: flex; align-items: center; padding: 5px; -webkit-tap-highlight-color: transparent;">
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          </button>
+          <h2 style="font-weight: bold; font-size: 18px; color: #1e293b;">Notifications</h2>
+          <div style="width: 34px;"></div> <!-- Spacer for center alignment -->
+        </header>
+
+        <div class="dash-content">
+          <!-- Custom Tabs -->
+          <div class="notif-tabs" style="display: flex; background: #f1f5f9; border-radius: 12px; padding: 4px; margin-bottom: 20px;">
+            <button id="tab-unread" style="flex: 1; padding: 10px; border: none; background: white; border-radius: 8px; font-weight: 600; color: #1e293b; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.2s;">
+              Unread <span id="unread-count" style="background: #ef4444; color: white; padding: 2px 6px; border-radius: 10px; font-size: 10px; margin-left: 5px; display: none;">0</span>
+            </button>
+            <button id="tab-read" style="flex: 1; padding: 10px; border: none; background: transparent; border-radius: 8px; font-weight: 600; color: #64748b; cursor: pointer; transition: all 0.2s;">
+              Read
+            </button>
+          </div>
+
+          <div id="notif-list" style="display: flex; flex-direction: column; gap: 12px;">
+            <p style="text-align:center; color:#94a3b8; font-size:14px; padding:20px;">No notifications</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Debt / Piutang View (Hidden initially) -->
+      <div class="dashboard-wrapper hidden" id="debt-panel">
+        <header class="dash-header" style="border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; margin-bottom: 15px;">
+          <button id="back-from-debt" style="background: none; border: none; cursor: pointer; color: #1e293b; display: flex; align-items: center; padding: 5px; -webkit-tap-highlight-color: transparent;">
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          </button>
+          <h2 style="font-weight: bold; font-size: 18px; color: #1e293b;">Catatan Piutang</h2>
+          <button id="debt-options-btn" style="background: none; border: none; cursor: pointer; color: #1e293b; display: flex; align-items: center; padding: 5px; -webkit-tap-highlight-color: transparent;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg>
+          </button>
+        </header>
+
+        <div class="dash-content">
+          <!-- Total Piutang Card -->
+          <div style="background: white; border-radius: 20px; padding: 25px 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.03); margin-bottom: 20px; display: flex; flex-direction: column; align-items: flex-start; border-left: 5px solid #4f46e5;">
+            <div style="font-size: 13px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Total Piutang Berjalan</div>
+            <h1 id="debt-total-amount" style="font-size: 34px; font-weight: 800; margin: 0; color: #1e293b; letter-spacing: -1px;">Rp0</h1>
+          </div>
+
+          <!-- Custom Tabs -->
+          <div class="notif-tabs" style="display: flex; background: #f1f5f9; border-radius: 12px; padding: 4px; margin-bottom: 20px;">
+            <button id="tab-debt-unpaid" style="flex: 1; padding: 10px; border: none; background: white; border-radius: 8px; font-weight: 600; color: #1e293b; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.2s;">
+              List Piutang Staff
+            </button>
+            <button id="tab-debt-paid" style="flex: 1; padding: 10px; border: none; background: transparent; border-radius: 8px; font-weight: 600; color: #64748b; cursor: pointer; transition: all 0.2s;">
+              Recent Activity
+            </button>
+          </div>
+
+          <!-- Add Debt Form (Removed, moved to modal) -->
+
+          <div id="debt-list" style="display: flex; flex-direction: column; gap: 12px; padding-bottom: 20px; max-height: calc(100vh - 280px); overflow-y: auto; padding-right: 5px;">
+            <p style="text-align:center; color:#94a3b8; font-size:14px; padding:20px;">Memuat data piutang...</p>
           </div>
         </div>
       </div>
@@ -297,6 +454,194 @@
           <button id="overtime-cancel-btn" class="modal-btn cancel">Cancel</button>
           <button id="overtime-confirm-btn" class="modal-btn confirm" style="background: #f59e0b; color: white; border: none;">Yes, I'm Working</button>
         </div>
+      </div>
+    </div>
+
+    <!-- Add Debt Modal -->
+    <div id="add-debt-modal" class="modal-overlay hidden">
+      <div class="modal-box" style="padding-bottom: 10px;">
+        <h4 style="font-weight: 700; margin-bottom: 20px;">Tambah Catatan Piutang</h4>
+        
+        <div style="margin-bottom: 15px; text-align: left;">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 5px;">Nama Rekan Kerja</label>
+          <select id="debt-name" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; background: #f8fafc; appearance: none; cursor: pointer;">
+            <option value="" disabled selected>Pilih Nama Staff</option>
+          </select>
+        </div>
+        <div style="margin-bottom: 15px; text-align: left;">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 5px;">Jumlah (Rp)</label>
+          <input type="text" inputmode="numeric" id="debt-amount" placeholder="Misal: 50.000" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; background: #f8fafc;">
+        </div>
+        <div style="margin-bottom: 20px; text-align: left;">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 5px;">Keterangan / Makanan</label>
+          <input type="text" id="debt-desc" placeholder="Misal: Pecel Lele" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; background: #f8fafc;">
+        </div>
+        
+        <button id="add-debt-btn" style="width: 100%; padding: 14px; margin-bottom: 10px; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #4f46e5, #3b82f6); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);">
+          Simpan Piutang
+        </button>
+        <button id="close-debt-modal-btn" class="modal-btn cancel" style="width: 100%;">Batal</button>
+      </div>
+    </div>
+
+    <!-- Pay Confirm Modal (For paying with deposit) -->
+    <div id="pay-confirm-modal" class="modal-overlay hidden">
+      <div class="modal-box">
+        <div style="width: 50px; height: 50px; border-radius: 50%; background: #d1fae5; color: #10b981; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        </div>
+        <h4 style="font-weight: 700;">Lunasi dengan Deposit</h4>
+        <p id="pay-confirm-msg">Deposit staff ini mencukupi untuk melunasi seluruh piutangnya. Lanjutkan pemotongan deposit otomatis?</p>
+        <div class="modal-actions">
+          <button id="pay-cancel-btn" class="modal-btn cancel">Batal</button>
+          <button id="pay-confirm-btn" class="modal-btn confirm" style="background: #10b981; color: white; border: none;">Ya, Lunas</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pay Input Modal (For entering cash amount) -->
+    <div id="pay-input-modal" class="modal-overlay hidden">
+      <div class="modal-box" style="padding-bottom: 10px;">
+        <h4 style="font-weight: 700; margin-bottom: 20px;">Pembayaran Piutang</h4>
+        
+        <div style="background: #f8fafc; padding: 15px; border-radius: 12px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; justify-content: space-between; font-size: 13px; color: #64748b;">
+            <span>Total Hutang:</span>
+            <span id="pay-modal-hutang" style="font-weight: 600; color: #ef4444;">Rp 0</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; color: #64748b;">
+            <span>Saldo Deposit:</span>
+            <span id="pay-modal-deposit" style="font-weight: 600; color: #10b981;">Rp 0</span>
+          </div>
+          <div style="height: 1px; background: #e2e8f0; margin: 5px 0;"></div>
+          <div style="display: flex; justify-content: space-between; font-size: 14px; color: #1e293b; font-weight: 700;">
+            <span>Kekurangan:</span>
+            <span id="pay-modal-kekurangan">Rp 0</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 20px; text-align: left;">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 5px;">Nominal Uang Diterima (Rp)</label>
+          <input type="text" inputmode="numeric" id="pay-input-amount" placeholder="Misal: 50.000" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; background: white;">
+          <p style="font-size: 11px; color: #94a3b8; margin-top: 8px;">Jika lebih dari kekurangan, otomatis masuk ke deposit.</p>
+        </div>
+        
+        <button id="submit-pay-btn" style="width: 100%; padding: 14px; margin-bottom: 10px; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
+          Simpan Pembayaran
+        </button>
+        <button id="close-pay-modal-btn" class="modal-btn cancel" style="width: 100%;">Batal</button>
+      </div>
+    </div>
+
+    <!-- Edit WA Modal -->
+    <div id="edit-wa-modal" class="modal-overlay hidden" style="z-index: 1000;">
+      <div class="modal-box">
+        <h4 style="font-weight: 700; margin-bottom: 20px;">Edit Nomor WhatsApp</h4>
+        <div style="margin-bottom: 20px; text-align: left;">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 5px;">Nomor WA Baru</label>
+          <input type="tel" id="edit-wa-input" placeholder="Misal: 08123456789" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; background: white;">
+        </div>
+        <div class="modal-actions">
+          <button id="close-edit-wa-btn" class="modal-btn cancel">Batal</button>
+          <button id="save-edit-wa-btn" class="modal-btn confirm" style="background: #3b82f6; color: white; border: none;">Simpan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Name Modal -->
+    <div id="edit-name-modal" class="modal-overlay hidden" style="z-index: 1000;">
+      <div class="modal-box">
+        <h4 style="font-weight: 700; margin-bottom: 20px;">Edit Nama Staff</h4>
+        <div style="margin-bottom: 20px; text-align: left;">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 5px;">Nama Baru</label>
+          <input type="text" id="edit-name-input" placeholder="Misal: Budi" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; background: white;">
+        </div>
+        <div class="modal-actions">
+          <button id="close-edit-name-btn" class="modal-btn cancel">Batal</button>
+          <button id="save-edit-name-btn" class="modal-btn confirm" style="background: #3b82f6; color: white; border: none;">Simpan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Debt Options Modal (3 Dots Menu) -->
+    <div id="debt-options-modal" class="modal-overlay hidden">
+      <div class="modal-box" style="padding-bottom: 10px; background: #f8fafc;">
+        <h4 style="font-weight: 700; margin-bottom: 20px; color: #1e293b;">Opsi Piutang</h4>
+        
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px;">
+          <button id="opt-add-debt" style="background: white; border: 1px solid #e2e8f0; padding: 14px; border-radius: 12px; font-weight: 600; color: #1e293b; display: flex; align-items: center; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            1. Tambah Catatan Piutang
+          </button>
+          
+          <button id="opt-add-deposit" style="background: white; border: 1px solid #e2e8f0; padding: 14px; border-radius: 12px; font-weight: 600; color: #1e293b; display: flex; align-items: center; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px;"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg>
+            2. Tambah Deposit Staff
+          </button>
+          
+          <button id="opt-add-staff" style="background: white; border: 1px solid #e2e8f0; padding: 14px; border-radius: 12px; font-weight: 600; color: #1e293b; display: flex; align-items: center; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px;"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+            3. Tambah Data Staff
+          </button>
+          
+          <button id="opt-list-staff" style="background: white; border: 1px solid #e2e8f0; padding: 14px; border-radius: 12px; font-weight: 600; color: #1e293b; display: flex; align-items: center; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px;"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            4. List Staff
+          </button>
+        </div>
+
+        <button id="close-options-modal-btn" class="modal-btn cancel" style="width: 100%;">Tutup</button>
+      </div>
+    </div>
+
+    <!-- Add Deposit Modal -->
+    <div id="add-deposit-modal" class="modal-overlay hidden">
+      <div class="modal-box" style="padding-bottom: 10px;">
+        <h4 style="font-weight: 700; margin-bottom: 20px;">Tambah Deposit Staff</h4>
+        <div style="margin-bottom: 15px; text-align: left;">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 5px;">Nama Staff</label>
+          <select id="deposit-name" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; background: #f8fafc; appearance: none; cursor: pointer;">
+            <option value="" disabled selected>Pilih Nama Staff</option>
+          </select>
+        </div>
+        <div style="margin-bottom: 20px; text-align: left;">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 5px;">Jumlah Deposit (Rp)</label>
+          <input type="text" inputmode="numeric" id="deposit-amount" placeholder="Misal: 100.000" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; background: #f8fafc;">
+        </div>
+        <button id="save-deposit-btn" style="width: 100%; padding: 14px; margin-bottom: 10px; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
+          Simpan Deposit
+        </button>
+        <button id="close-deposit-modal-btn" class="modal-btn cancel" style="width: 100%;">Batal</button>
+      </div>
+    </div>
+
+    <!-- Add Staff Modal -->
+    <div id="add-staff-modal" class="modal-overlay hidden">
+      <div class="modal-box" style="padding-bottom: 10px;">
+        <h4 style="font-weight: 700; margin-bottom: 20px;">Tambah Data Staff</h4>
+        <div style="margin-bottom: 15px; text-align: left;">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 5px;">Nama Lengkap Staff</label>
+          <input type="text" id="staff-name" placeholder="Misal: Budi Santoso" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; background: #f8fafc;">
+        </div>
+        <div style="margin-bottom: 20px; text-align: left;">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 5px;">Nomor WhatsApp</label>
+          <input type="tel" id="staff-wa" placeholder="Misal: 081234567890" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; background: #f8fafc;">
+        </div>
+        <button id="save-staff-btn" style="width: 100%; padding: 14px; margin-bottom: 10px; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);">
+          Simpan Data Staff
+        </button>
+        <button id="close-staff-modal-btn" class="modal-btn cancel" style="width: 100%;">Batal</button>
+      </div>
+    </div>
+
+    <!-- List Staff Modal -->
+    <div id="list-staff-modal" class="modal-overlay hidden">
+      <div class="modal-box" style="padding-bottom: 10px; max-height: 80vh; display: flex; flex-direction: column;">
+        <h4 style="font-weight: 700; margin-bottom: 20px; flex-shrink: 0;">List Data Staff</h4>
+        <div id="staff-list-container" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; text-align: left; overflow-y: auto; flex-grow: 1;">
+          <p style="text-align:center; color:#94a3b8; font-size:14px; padding:20px;">Belum ada data staff (coming soon).</p>
+        </div>
+        <button id="close-list-staff-btn" class="modal-btn cancel" style="width: 100%; flex-shrink: 0;">Tutup</button>
       </div>
     </div>
 

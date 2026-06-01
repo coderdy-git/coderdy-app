@@ -618,3 +618,12 @@ h1 {
 }
 
 .modal-btn.confirm:active { background: #dc2626; }
+
+/* Hide scrollbars globally but keep functionality */
+*::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
