@@ -1459,7 +1459,10 @@ document.addEventListener('DOMContentLoaded', () => {
                   await syncDebtsToSupabase();
                   await syncStaffsToSupabase();
                   payAllDebtBtn.disabled = false;
-                  await window.showStaffDebtDetail(staffName);
+                  // Back to piutang list
+                  debtDetailPanel?.classList.add('hidden');
+                  debtPanel?.classList.remove('hidden');
+                  if (currentSessionUser) renderDebts(currentSessionUser.id);
                 };
               }
             };
@@ -1510,7 +1513,10 @@ document.addEventListener('DOMContentLoaded', () => {
                   await syncDebtsToSupabase();
                   await syncStaffsToSupabase();
                   payAllDebtBtn.disabled = false;
-                  await window.showStaffDebtDetail(staffName);
+                  // Back to piutang list
+                  debtDetailPanel?.classList.add('hidden');
+                  debtPanel?.classList.remove('hidden');
+                  if (currentSessionUser) renderDebts(currentSessionUser.id);
                 };
               }
             };
