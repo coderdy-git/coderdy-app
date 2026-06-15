@@ -281,8 +281,10 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     
     // UI Loading state
-    const originalContent = googleBtn.innerHTML;
-    googleBtn.innerHTML = '<div class="spinner" style="border-color: rgba(255,255,255,0.2); border-top-color: white;"></div>';
+    const icon = googleBtn.querySelector('.google-icon');
+    if (icon) icon.style.display = 'none';
+    btnText.style.visibility = 'hidden';
+    spinner.classList.remove('hidden');
     googleBtn.disabled = true;
     messageBox.classList.add('hidden');
 
@@ -291,21 +293,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (error) {
         showMessage(error.message, 'error');
-        googleBtn.innerHTML = originalContent;
-        googleBtn.disabled = false;
+        resetBtn();
       }
       // If successful, the page will redirect to Google's consent screen.
     } catch (err) {
       showMessage('Network error or configuration issue.', 'error');
-      googleBtn.innerHTML = originalContent;
-      googleBtn.disabled = false;
+      resetBtn();
     }
   });
 
   passkeyLoginBtn?.addEventListener('click', async (e) => {
     e.preventDefault();
-    const originalContent = passkeyLoginBtn.innerHTML;
-    passkeyLoginBtn.innerHTML = '<div class="spinner" style="border-color: rgba(255,255,255,0.2); border-top-color: white;"></div>';
+    const passkeyIcon = passkeyLoginBtn.querySelector('svg');
+    if (passkeyIcon) passkeyIcon.style.display = 'none';
+    passkeyLoginBtnText.style.visibility = 'hidden';
+    passkeyLoginSpinner.classList.remove('hidden');
     passkeyLoginBtn.disabled = true;
     messageBox.classList.add('hidden');
 
@@ -313,16 +315,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const { data, error } = await AuthService.signInWithPasskey();
       if (error) {
         showMessage(error.message, 'error');
-        passkeyLoginBtn.innerHTML = originalContent;
-        passkeyLoginBtn.disabled = false;
       } else if (data?.session) {
         showDashboard(data.session.user);
       }
     } catch (err) {
       showMessage('Passkey login failed or cancelled.', 'error');
-      passkeyLoginBtn.innerHTML = originalContent;
-      passkeyLoginBtn.disabled = false;
     }
+    
+    if (passkeyIcon) passkeyIcon.style.display = '';
+    passkeyLoginBtnText.style.visibility = 'visible';
+    passkeyLoginSpinner.classList.add('hidden');
+    passkeyLoginBtn.disabled = false;
   });
 
   // Custom Toast System
@@ -1745,7 +1748,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function resetBtn() {
+    btnText.style.visibility = 'visible';
     btnText.style.opacity = '1';
+    const icon = googleBtn.querySelector('.google-icon');
+    if (icon) icon.style.display = '';
     spinner.classList.add('hidden');
     googleBtn.disabled = false;
   }
