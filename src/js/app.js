@@ -1843,6 +1843,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const name = user.user_metadata?.full_name || user.email;
       profileName.textContent = name;
       profileEmail.textContent = user.email;
+      // Show app version
+      const versionEl = document.getElementById('profile-version');
+      if (versionEl) versionEl.textContent = 'v' + __APP_VERSION__;
 
       // Handle Avatar
       const avatarUrl = user.user_metadata?.avatar_url || user.user_metadata?.picture;
