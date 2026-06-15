@@ -22,6 +22,8 @@ function compareSemver(a, b) {
 }
 
 export async function checkForUpdate() {
+  // Skip update check in dev mode
+  if (import.meta.env.DEV) return null;
   try {
     const res = await fetch(
       `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/releases/latest`,
