@@ -33,6 +33,7 @@ jobs:
           npm ci
           echo "VITE_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
           echo "VITE_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
+          echo "VITE_APP_VERSION=1.0.${{ github.run_number }}" >> .env
           npm run build 2>&1
 
       - name: Gradle build

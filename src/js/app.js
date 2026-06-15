@@ -2,6 +2,7 @@ import { AuthService, AttendanceService, UserService, NotificationService, Profi
 import { initDB, addAttendance, getUnsyncedAttendances, markAsSynced, getLastAttendance, getAttendances, insertPulledAttendance, clearDB, addDebt, getDebts, getUnsyncedDebts, markDebtAsSynced, insertPulledDebt, markDebtAsPaidLocal, addStaff, getStaffs, updateStaffDepositLocal, updateStaffWaLocal, updateStaffNameLocal, getUnsyncedStaffs, markStaffAsSynced, insertPulledStaff } from './db.js';
 import { App } from '@capacitor/app';
 import { supabase } from './api.js';
+import { checkForUpdate, showUpdatePrompt } from './update.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const googleBtn = document.getElementById('google-btn');
@@ -214,9 +215,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Initialize Offline SQLite Database
-  initDB().then(() => {
+  initDB().then(async () => {
     // Check current session on load after DB is ready
     checkSession();
+    // Auto check for app update (silent, no delay)
+    const update = await checkForUpdate();
+    if (update) showUpdatePrompt(update);
   }).catch(err => {
     console.error("Init DB failed", err);
     showToast('Failed to initialize local database.', 'error');
