@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // UI Loading state
     const icon = googleBtn.querySelector('.google-icon');
     if (icon) icon.style.display = 'none';
-    btnText.style.visibility = 'hidden';
+    btnText.style.display = 'none';
     spinner.classList.remove('hidden');
     googleBtn.disabled = true;
     messageBox.classList.add('hidden');
@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     const passkeyIcon = passkeyLoginBtn.querySelector('svg');
     if (passkeyIcon) passkeyIcon.style.display = 'none';
-    passkeyLoginBtnText.style.visibility = 'hidden';
+    passkeyLoginBtnText.style.display = 'none';
     passkeyLoginSpinner.classList.remove('hidden');
     passkeyLoginBtn.disabled = true;
     messageBox.classList.add('hidden');
@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     if (passkeyIcon) passkeyIcon.style.display = '';
-    passkeyLoginBtnText.style.visibility = 'visible';
+    passkeyLoginBtnText.style.display = '';
     passkeyLoginSpinner.classList.add('hidden');
     passkeyLoginBtn.disabled = false;
   });
@@ -1748,7 +1748,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function resetBtn() {
-    btnText.style.visibility = 'visible';
+    btnText.style.display = '';
     btnText.style.opacity = '1';
     const icon = googleBtn.querySelector('.google-icon');
     if (icon) icon.style.display = '';
