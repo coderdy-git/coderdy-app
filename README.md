@@ -1,64 +1,52 @@
-# Coderdy Attendance 🚀
+# CODERDY Attendance
 
-**A modern, blazing fast, offline-first attendance tracking system built for both Web and Mobile.**
+Aplikasi absensi **offline-first** untuk karyawan. Bisa dipake di HP (Android) maupun web browser.
 
-Coderdy Attendance is a hybrid web and mobile application designed to seamlessly track employee check-ins, check-outs, and leaves. Built with an architecture that gracefully handles network drops, it caches data locally and synchronizes with the cloud once the connection is restored. 
+## Tentang Aplikasi
 
-## ✨ Key Features
+CODERDY Attendance adalah aplikasi pencatatan kehadiran yang:
 
-- **Hybrid Architecture:** Write once, run everywhere. Optimized for both modern web browsers (via Vite) and native mobile apps (via Capacitor Android/iOS).
-- **Offline-First Synchronization:** Uses robust local SQLite (on native) and LocalStorage (on web) to store punches when offline, then automatically syncs to **Supabase** in the background when online.
-- **Passkey Authentication:** Cutting-edge, passwordless login support using biometric passkeys, alongside traditional Google OAuth.
-- **Dynamic Role Management:** Intelligent UI that adapts to the user. Admins and Testers get specialized badges and developer tooling directly in the app.
-- **Smart Reporting:** Automatically generates grouped attendance reports by day, calculating In/Out pairs and leaves into beautiful, easy-to-read UI cards.
-- **Modern UI/UX:** A sleek, flexbox-powered design system with micro-animations, glassmorphism elements, and a premium color palette.
+- **Bisa offline** — absen tetap jalan meski gak ada internet. Data otomatis nyambung (sync) pas online lagi.
+- **Multi-perangkat** — Hybrid app, jalan di Android (APK) dan browser web.
+- **Login fleksibel** — Bisa pake Google OAuth atau Passkey (biometric/login tanpa password).
+- **Multi-role** — Ada role Personal, Employee, Supervisor, Administrator, Developer. Tiap role punya tampilan dan fitur yang beda.
+- **Catatan piutang** — Plus fitur pencatatan hutang piutang sama staff, lengkap dengan deposit dan histori.
+- **Report harian** — Lihat rekap absensi per hari, lengkap dengan jam masuk, jam pulang, dan status izin/cuti.
+- **Notifikasi realtime** — Dapet notifikasi langsung pas ada update absen atau info baru.
 
-## 🛠️ Technology Stack
+## Teknologi
 
-- **Frontend:** Vanilla JS + HTML5 + CSS3 (Zero heavy UI frameworks for maximum speed)
-- **Build Tool:** Vite
-- **Mobile Runtime:** Capacitor JS
-- **Database (Cloud):** Supabase (PostgreSQL)
-- **Database (Local):** Capacitor-Community SQLite (Native) & LocalStorage (Web fallback)
+| Lapisan | Teknologi |
+|---|---|
+| Frontend | Vanilla JS + HTML + CSS (gak pake framework berat) |
+| Build | Vite |
+| Mobile | Capacitor (Android) |
+| Cloud DB | Supabase (PostgreSQL) |
+| Local DB | SQLite (native) / LocalStorage (web fallback) |
+| Auth | Google OAuth + Passkey (WebAuthn) |
 
-## 🚀 Getting Started
+## Cara Dapetin APK
 
-### Prerequisites
-- Node.js (v16+)
-- npm or yarn
-- Supabase Project (for backend services)
+APK terbaru bisa didownload dari **GitHub Releases**:
 
-### Installation
+> https://github.com/coderdy-git/coderdy-attendance-app/releases
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/coderdy-git/coderdy-app.git
-   cd coderdy-app/my-app
-   ```
+Download file `app-debug.apk`, install di HP Android. Pastikan izinkan instalasi dari sumber tidak dikenal.
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+> **Catatan:** APK ini di-sign dengan key debug yang konsisten, jadi update versi baru bisa langsung install di atas yang lama (tanpa perlu uninstall dulu).
 
-3. **Configure Supabase:**
-   Set up your `URL` and `ANON_KEY` in `src/js/supabase.js`.
+## Struktur Project
 
-4. **Run for Web (Development):**
-   ```bash
-   npm run start
-   ```
-
-5. **Build for Mobile (Capacitor):**
-   ```bash
-   npm run build
-   npx cap sync android
-   npx cap open android
-   ```
-
-## 🔐 Role-Based Access
-- **DEVELOPER:** Logging in with `admin.coderdy@gmail.com` grants access to developer tools (e.g., injecting dummy data, clearing local DB) and displays the `[DEVELOPER]` badge.
-- **TESTER:** Any email containing the word `tester` will automatically receive the `[TESTER]` badge on the dashboard.
-
-## 📄 License
-This project is proprietary and built for Coderdy. All rights reserved.
+```
+├── src/              # Kode utama (web app)
+│   ├── index.html
+│   ├── js/
+│   │   ├── app.js       # Logic utama
+│   │   ├── api.js       # Service Supabase
+│   │   ├── db.js        # SQLite local database
+│   │   └── update.js    # Auto-update checker
+│   └── css/
+├── android/          # Native Android project (Capacitor)
+├── dist/             # Hasil build web
+└── .github/          # CI workflow (auto build APK tiap push ke main)
+```
