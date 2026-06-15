@@ -125,7 +125,10 @@ h1 {
   border-top-color: var(--primary);
   animation: spin 1s ease-in-out infinite;
   position: absolute;
-  right: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  right: auto;
 }
 
 @keyframes spin {
