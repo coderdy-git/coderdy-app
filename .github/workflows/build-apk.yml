@@ -25,40 +25,48 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Android SDK platform & tools
+      - name: Install Android cmdline-tools
         run: |
-          yes | sdkmanager --install "platforms;android-36" "build-tools;36.0.0" --sdk_root=$ANDROID_SDK_ROOT
-          echo "✅ SDK installed"
+          mkdir -p $HOME/android-sdk/cmdline-tools
+          cd $HOME/android-sdk/cmdline-tools
+          curl -sLo cmdline-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          unzip -q cmdline-tools.zip
+          mv cmdline-tools latest
+          rm cmdline-tools.zip
+          echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
+          echo "ANDROID_SDK_ROOT=$HOME/android-sdk" >> $GITHUB_ENV
+          echo "$HOME/android-sdk/cmdline-tools/latest/bin" >> $GITHUB_PATH
 
-      - name: Create local.properties
+      - name: Accept licenses & install SDK
         run: |
-          echo "sdk.dir=$ANDROID_HOME" > android/local.properties
-          echo "✅ local.properties created"
+          yes | sdkmanager --licenses > /dev/null
+          sdkmanager "platforms;android-36" "build-tools;36.0.0" "platform-tools"
 
-      - name: Install dependencies
+      - name: local.properties
+        run: echo "sdk.dir=$ANDROID_HOME" > android/local.properties
+
+      - name: Install npm deps
         run: npm ci
 
-      - name: Create .env for build
+      - name: Build .env
         run: |
           echo "VITE_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
           echo "VITE_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
 
-      - name: Build web app
+      - name: Build web
         run: npm run build
 
-      - name: Sync Capacitor
+      - name: Capacitor sync
         run: npx cap sync android
 
       - name: Build APK
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon --stacktrace
+          export ANDROID_HOME=$HOME/android-sdk
+          ./gradlew assembleDebug --no-daemon --stacktrace 2>&1
 
-      - name: Upload APK as artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         if: success()
         with:
@@ -74,9 +82,6 @@ jobs:
           name: v1.0.${{ github.run_number }}
           files: android/app/build/outputs/apk/debug/app-debug.apk
           body: |
-            **Coderdy Attendance APK**
-
-            - 🏷️ v1.0.${{ github.run_number }}
-            - 📦 Auto build dari commit ${{ github.sha }}
-            - 📱 Download & install di HP langsung
+            **Coderdy Attendance APK** — v1.0.${{ github.run_number }}
+            Auto build from commit ${{ github.sha }}
           make_latest: true
