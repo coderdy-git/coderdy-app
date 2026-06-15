@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
@@ -39,9 +41,18 @@ jobs:
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee gradle.log
+          exit ${PIPESTATUS[0]}
 
-      - name: Upload logs
-        if: failure()
+      - name: Find APK
+        if: success() || failure()
+        run: |
+          echo "=== Looking for APK ==="
+          find android -name "*.apk" 2>/dev/null || echo "No APK found"
+          echo "=== Gradle log tail ==="
+          tail -50 android/gradle.log 2>/dev/null || echo "No gradle.log"
+
+      - name: Upload logs (always)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: gradle-logs
@@ -54,6 +65,7 @@ jobs:
           name: coderdy-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 7
+          overwrite: true
 
       - uses: softprops/action-gh-release@v2
         if: github.ref == 'refs/heads/main' && success()
@@ -61,5 +73,8 @@ jobs:
           tag_name: v1.0.${{ github.run_number }}
           name: v1.0.${{ github.run_number }}
           files: android/app/build/outputs/apk/debug/app-debug.apk
-          body: "**Coderdy Attendance APK** — v1.0.${{ github.run_number }}"
+          body: "**Coderdy Attendance APK** — v1.0.${{ github.run_number }}
+            Auto-built from commit ${{ github.sha }}
+            🔽 Download APK from the Artifacts section above if release upload failed."
           make_latest: true
+          fail_on_unmatched_files: false
