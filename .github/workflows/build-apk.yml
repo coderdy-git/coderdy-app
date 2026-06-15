@@ -21,33 +21,32 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-
       - uses: android-actions/setup-android@v3
 
-      - name: Debug SDK
-        run: |
-          echo "ANDROID_HOME=$ANDROID_HOME"
-          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
-          echo "JAVA_HOME=$JAVA_HOME"
-          java -version
-          ls $ANDROID_HOME/platforms/ || echo "No platforms"
-          ls $ANDROID_HOME/build-tools/ || echo "No build-tools"
-          which sdkmanager || echo "No sdkmanager"
-          yes | sdkmanager --install "platforms;android-36" "build-tools;36.0.0" 2>&1 | tail -5
+      - name: Setup SDK
+        run: yes | sdkmanager --install "platforms;android-36" "build-tools;36.0.0" 2>&1
 
-      - name: Install & build
+      - name: Build web
         run: |
           npm ci
           echo "VITE_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
           echo "VITE_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
-          npm run build
-          npx cap sync android
+          npm run build 2>&1
 
-      - name: Build APK
+      - name: Gradle build
         run: |
+          npx cap sync android 2>&1
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon --stacktrace
+          ./gradlew assembleDebug --no-daemon --stacktrace 2>&1 | tee gradle.log
+
+      - name: Upload logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle-logs
+          path: android/gradle.log
+          retention-days: 3
 
       - uses: actions/upload-artifact@v4
         if: success()
@@ -62,6 +61,5 @@ jobs:
           tag_name: v1.0.${{ github.run_number }}
           name: v1.0.${{ github.run_number }}
           files: android/app/build/outputs/apk/debug/app-debug.apk
-          body: |
-            **Coderdy Attendance APK** — v1.0.${{ github.run_number }}
+          body: "**Coderdy Attendance APK** — v1.0.${{ github.run_number }}"
           make_latest: true
