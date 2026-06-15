@@ -418,7 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!confirm('This will insert 50 random dummy records into the cloud database. Continue?')) return;
     
     devGenerateDummyBtn.disabled = true;
-    devGenerateDummyBtn.innerHTML = '<div class="spinner" style="border-color: rgba(59, 130, 246, 0.2); border-top-color: #3b82f6; width: 18px; height: 18px; position: relative; right: auto; margin-right: 10px;"></div> Generating...';
+    devGenerateDummyBtn.innerHTML = '<div class="spinner" style="border-color: rgba(59, 130, 246, 0.2); border-top-color: #3b82f6; width: 18px; height: 18px; margin-right: 10px;"></div> Generating...';
     
     try {
       const records = [];
@@ -580,7 +580,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (!currentSessionUser) return;
     
-    generateReportBtn.innerHTML = '<div class="spinner" style="border-color: rgba(255,255,255,0.2); border-top-color: white; width: 18px; height: 18px; position: relative; right: auto; margin-right: 8px;"></div> Generating...';
+    generateReportBtn.innerHTML = '<div class="spinner" style="border-color: rgba(255,255,255,0.2); border-top-color: white; width: 18px; height: 18px; margin-right: 8px;"></div> Generating...';
     generateReportBtn.disabled = true;
     reportResultsList.innerHTML = '<p style="text-align:center; color:#94a3b8; font-size:14px; padding:20px;">Loading report data...</p>';
     
@@ -1188,7 +1188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     addDebtBtn.disabled = true;
-    addDebtBtn.innerHTML = '<div class="spinner" style="border-color: rgba(255,255,255,0.2); border-top-color: white; width: 18px; height: 18px; position: relative; right: auto;"></div>';
+    addDebtBtn.innerHTML = '<div class="spinner" style="border-color: rgba(255,255,255,0.2); border-top-color: white; width: 18px; height: 18px; "></div>';
     
     try {
       const id = generateUUID();
@@ -1228,7 +1228,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     saveStaffBtn.disabled = true;
-    saveStaffBtn.innerHTML = '<div class="spinner" style="border-color: rgba(255,255,255,0.2); border-top-color: white; width: 18px; height: 18px; position: relative; right: auto;"></div>';
+    saveStaffBtn.innerHTML = '<div class="spinner" style="border-color: rgba(255,255,255,0.2); border-top-color: white; width: 18px; height: 18px; "></div>';
     
     try {
       const id = generateUUID();
@@ -1260,7 +1260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     saveDepositBtn.disabled = true;
-    saveDepositBtn.innerHTML = '<div class="spinner" style="border-color: rgba(255,255,255,0.2); border-top-color: white; width: 18px; height: 18px; position: relative; right: auto;"></div>';
+    saveDepositBtn.innerHTML = '<div class="spinner" style="border-color: rgba(255,255,255,0.2); border-top-color: white; width: 18px; height: 18px; "></div>';
     
     try {
       const staffs = await getStaffs(currentSessionUser.id);

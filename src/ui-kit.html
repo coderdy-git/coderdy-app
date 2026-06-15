@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CODERDY UI Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #f0f2f5;
+      color: #1e293b;
+      padding: 40px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 { font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-bottom: 5px; }
+    h1 span { color: #3b82f6; }
+    .subtitle { color: #64748b; font-size: 15px; margin-bottom: 40px; }
+    .section { margin-bottom: 50px; }
+    .section-title {
+      font-size: 20px; font-weight: 700; margin-bottom: 20px;
+      padding-bottom: 10px; border-bottom: 2px solid #e2e8f0;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title .badge {
+      font-size: 12px; background: #e2e8f0; color: #475569;
+      padding: 2px 10px; border-radius: 10px; font-weight: 600;
+    }
+    .grid { display: grid; gap: 20px; }
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+    @media (max-width: 768px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      body { padding: 20px; }
+    }
+
+    .card {
+      background: white; border-radius: 16px; padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .card-label {
+      font-size: 12px; font-weight: 700; color: #94a3b8;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;
+    }
+    .demo-area {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      padding: 20px 0;
+    }
+
+    /* Color Swatches */
+    .swatch-group { display: flex; flex-wrap: wrap; gap: 10px; }
+    .swatch {
+      width: 80px; height: 80px; border-radius: 12px;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: flex-end; padding: 8px;
+      font-size: 11px; font-weight: 600; color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+    .swatch.dark-text { color: #1e293b; text-shadow: none; }
+    .swatch .hex { font-size: 10px; font-weight: 400; opacity: 0.8; }
+    .swatch-lg { width: 100px; height: 100px; font-size: 12px; }
+
+    /* Typography */
+    .typo-grid { display: flex; flex-direction: column; gap: 8px; }
+    .typo-row {
+      display: flex; align-items: baseline; gap: 20px;
+      padding: 10px 15px; background: #f8fafc; border-radius: 8px;
+    }
+    .typo-label { font-size: 12px; color: #94a3b8; width: 70px; flex-shrink: 0; font-weight: 600; }
+    .typo-example { font-weight: 400; }
+
+    /* Buttons */
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 24px; border-radius: 14px; border: none;
+      font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 500;
+      cursor: pointer; position: relative;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+    .btn-google {
+      background: white; color: #334155; border: 1px solid #e2e8f0; width: 100%; max-width: 320px;
+    }
+    .btn-passkey {
+      background: #0f172a; color: white; width: 100%; max-width: 320px;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #3b82f6);
+      color: white; box-shadow: 0 4px 15px rgba(79,70,229,0.3); width: 100%;
+    }
+    .btn-green {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white; box-shadow: 0 4px 15px rgba(16,185,129,0.3); width: 100%;
+    }
+    .btn-danger {
+      background: #ef4444; color: white; border: none; width: 100%;
+    }
+    .btn-outline {
+      background: white; color: #ef4444; border: 1.5px solid #fee2e2; width: 100%;
+    }
+    .btn-ghost {
+      background: #f1f5f9; color: #475569; border: none;
+    }
+    .btn-sm { padding: 10px 16px; font-size: 14px; border-radius: 12px; width: auto; }
+
+    /* Badges */
+    .badge-demo {
+      font-size: 10px; font-weight: 700; padding: 3px 8px;
+      border-radius: 6px; letter-spacing: 0.5px; text-transform: uppercase;
+    }
+
+    /* Bottom Nav */
+    .bottom-nav-demo {
+      display: flex; justify-content: space-around; align-items: center;
+      padding: 8px 15px 12px; background: white; border-radius: 20px 20px 0 0;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.05); border-top: 1px solid #e2e8f0;
+      max-width: 400px; margin: 0 auto;
+    }
+    .nav-item-demo {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-radius: 50px; cursor: pointer;
+      font-size: 13px; font-weight: 600; color: #94a3b8;
+    }
+    .nav-item-demo.active { background: #eef2ff; color: #4f46e5; padding: 8px 16px; }
+    .nav-item-demo svg { width: 22px; height: 22px; }
+
+    /* Modal */
+    .modal-box-demo {
+      background: white; width: 85%; max-width: 320px;
+      border-radius: 20px; padding: 25px; text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15); margin: 0 auto;
+    }
+    .modal-box-demo h4 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .modal-box-demo p { font-size: 14px; color: #64748b; margin-bottom: 25px; line-height: 1.5; }
+    .modal-actions-demo { display: flex; gap: 12px; }
+
+    /* Debt Card */
+    .debt-card {
+      background: white; border-radius: 12px; padding: 15px;
+      border-left: 4px solid #f59e0b;
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; transition: 0.2s; max-width: 400px;
+    }
+    .debt-card.paid { border-left-color: #10b981; opacity: 0.8; }
+
+    /* Menu Item */
+    .menu-item-demo {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding: 20px; background: white; border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03); cursor: pointer;
+      max-width: 120px;
+    }
+
+    /* Spinner */
+    .spinner-demo {
+      width: 20px; height: 20px;
+      border: 3px solid rgba(0,0,0,0.1); border-radius: 50%;
+      border-top-color: #3b82f6; animation: spin 1s ease-in-out infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Toast */
+    .toast-demo {
+      background: white; padding: 12px 20px; border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      display: flex; align-items: center; gap: 12px;
+      font-weight: 600; font-size: 14px;
+      border-left: 4px solid var(--t-color, #3b82f6);
+      max-width: 350px;
+    }
+    .toast-demo.success { border-left-color: #10b981; }
+    .toast-demo.error { border-left-color: #ef4444; }
+
+    .role-badge-dev { background: #dbeafe; color: #1e3a8a; }
+    .role-badge-admin { background: #ede9fe; color: #5b21b6; }
+    .role-badge-sup { background: #ffedd5; color: #9a3412; }
+    .role-badge-emp { background: #ccfbf1; color: #115e59; }
+    .role-badge-pers { background: #f1f5f9; color: #475569; }
+
+    hr { border: none; border-top: 1px solid #e2e8f0; margin: 20px 0; }
+
+    .mobile-frame {
+      background: #f8fafc; border-radius: 24px; padding: 20px;
+      border: 2px solid #e2e8f0; max-width: 420px; margin: 0 auto;
+    }
+
+    .wa-btn {
+      background: #25D366; color: white; border: none; border-radius: 8px;
+      padding: 6px 12px; display: flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      box-shadow: 0 4px 10px rgba(37,211,102,0.3);
+      text-decoration: none;
+    }
+
+    .input-demo {
+      width: 100%; padding: 12px; border-radius: 10px;
+      border: 1px solid #e2e8f0; font-family: 'Outfit', sans-serif;
+      font-size: 14px; outline: none; background: #f8fafc;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <h1>CODERDY<span>.</span></h1>
+  <p class="subtitle">UI Kit & Design System — Coderdy Attendance App</p>
+
+  <!-- COLORS -->
+  <div class="section">
+    <div class="section-title">🎨 Warna <span class="badge">Color Palette</span></div>
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-label">Primary</div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#4f46e5;">Indigo #4F46E5</div>
+          <div class="swatch" style="background:#3b82f6;">Blue #3B82F6</div>
+          <div class="swatch" style="background:#eef2ff;">Bg Light #EEF2FF</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Semantic</div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#10b981;">Success #10B981</div>
+          <div class="swatch" style="background:#ef4444;">Error #EF4444</div>
+          <div class="swatch" style="background:#f59e0b;">Warning #F59E0B</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Text & BG</div>
+        <div class="swatch-group">
+          <div class="swatch dark-text" style="background:#1e293b;color:white;">Text #1E293B</div>
+          <div class="swatch dark-text" style="background:#64748b;">Muted #64748B</div>
+          <div class="swatch dark-text" style="background:#94a3b8;">Lighter #94A3B8</div>
+          <div class="swatch dark-text" style="background:#f8fafc;border:1px solid #e2e8f0;">BG #F8FAFC</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Gradient</div>
+        <div class="swatch-group">
+          <div class="swatch swatch-lg" style="background:linear-gradient(135deg,#4f46e5,#3b82f6);">Primary Button</div>
+          <div class="swatch swatch-lg" style="background:linear-gradient(135deg,#10b981,#059669);">Success Button</div>
+          <div class="swatch swatch-lg" style="background:linear-gradient(135deg,#e0e7ff,#f3e8ff);">Page BG</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="section">
+    <div class="section-title">🔤 Tipografi <span class="badge">Outfit Font</span></div>
+    <div class="card">
+      <div class="typo-grid">
+        <div class="typo-row"><span class="typo-label">H1 (28px)</span><span class="typo-example" style="font-size:28px;font-weight:800;">CODERDY.</span></div>
+        <div class="typo-row"><span class="typo-label">H2 (22px)</span><span class="typo-example" style="font-size:22px;font-weight:700;">Dashboard</span></div>
+        <div class="typo-row"><span class="typo-label">H3 (18px)</span><span class="typo-example" style="font-size:18px;font-weight:700;">Profile Name</span></div>
+        <div class="typo-row"><span class="typo-label">Body (16px)</span><span class="typo-example" style="font-size:16px;font-weight:500;">Continue with Google</span></div>
+        <div class="typo-row"><span class="typo-label">Small (14px)</span><span class="typo-example" style="font-size:14px;color:#64748b;">User email or description text</span></div>
+        <div class="typo-row"><span class="typo-label">Label (12px)</span><span class="typo-example" style="font-size:12px;color:#94a3b8;font-weight:600;">JANUARY 15</span></div>
+        <div class="typo-row"><span class="typo-label">Clock (48px)</span><span class="typo-example" style="font-size:48px;font-weight:800;font-variant-numeric:tabular-nums;">12:30:45</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="section">
+    <div class="section-title">🔘 Tombol <span class="badge">Buttons</span></div>
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-label">Login Buttons</div>
+        <div class="demo-area">
+          <button class="btn btn-google">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20">
+              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+            </svg>
+            <span>Continue with Google</span>
+          </button>
+          <button class="btn btn-passkey">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>Sign in with Passkey</span>
+          </button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Action Buttons</div>
+        <div class="demo-area">
+          <button class="btn btn-primary"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Generate Report</button>
+          <button class="btn btn-green">Bayar Lunas</button>
+          <button class="btn btn-danger" style="width:auto;padding:10px 20px;">Sign Out</button>
+          <button class="btn btn-outline" style="width:auto;padding:10px 20px;">Sign Out</button>
+          <button class="btn btn-ghost btn-sm">Cancel</button>
+          <button class="btn btn-ghost btn-sm" style="background:#ef4444;color:white;">Sign Out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BADGES -->
+  <div class="section">
+    <div class="section-title">🏷️ Badge Role <span class="badge">Role Badges</span></div>
+    <div class="card">
+      <div class="demo-area" style="flex-direction:row;flex-wrap:wrap;">
+        <span class="badge-demo role-badge-dev">DEVELOPER</span>
+        <span class="badge-demo role-badge-admin">ADMINISTRATOR</span>
+        <span class="badge-demo role-badge-sup">SUPERVISOR</span>
+        <span class="badge-demo role-badge-emp">EMPLOYEE</span>
+        <span class="badge-demo role-badge-pers">PERSONAL</span>
+        <span class="badge-demo role-badge-pers" style="background:#fce7f3;color:#9d174d;">TESTER</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  <div class="section">
+    <div class="section-title">💬 Modal <span class="badge">Dialogs</span></div>
+    <div class="grid grid-2">
+      <div class="mobile-frame">
+        <div class="modal-box-demo">
+          <div style="width:50px;height:50px;border-radius:50%;background:#fee2e2;display:flex;align-items:center;justify-content:center;margin:0 auto 15px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <h4>Sign Out</h4>
+          <p>Are you sure you want to sign out from CODERDY?</p>
+          <div class="modal-actions-demo">
+            <button class="btn btn-ghost btn-sm" style="flex:1;">Cancel</button>
+            <button class="btn btn-sm" style="flex:1;background:#ef4444;color:white;border:none;">Sign Out</button>
+          </div>
+        </div>
+      </div>
+      <div class="mobile-frame">
+        <div class="modal-box-demo">
+          <div style="width:50px;height:50px;border-radius:50%;background:#d1fae5;display:flex;align-items:center;justify-content:center;margin:0 auto 15px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h4>Lunasi dengan Deposit</h4>
+          <p>Deposit staff ini mencukupi untuk melunasi seluruh piutangnya.</p>
+          <div class="modal-actions-demo">
+            <button class="btn btn-ghost btn-sm" style="flex:1;">Batal</button>
+            <button class="btn btn-green btn-sm" style="flex:1;">Ya, Lunas</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="section">
+    <div class="section-title">📦 Kartu <span class="badge">Cards</span></div>
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-label">Debt Card (Belum Lunas)</div>
+        <div class="debt-card" style="width:100%;">
+          <div>
+            <h4 style="margin:0 0 5px;font-size:16px;color:#1e293b;font-weight:700;">Budi Santoso</h4>
+            <span style="font-size:13px;color:#64748b;">Belum Lunas</span>
+          </div>
+          <span style="font-size:16px;font-weight:800;color:#ef4444;">Rp 50.000</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Debt Card (Lunas)</div>
+        <div class="debt-card paid" style="width:100%;">
+          <div>
+            <h4 style="margin:0 0 5px;font-size:16px;color:#1e293b;font-weight:700;">Siti Rahma</h4>
+            <p style="margin:0 0 5px;font-size:13px;color:#64748b;">Pecel Lele</p>
+            <span style="font-size:11px;color:#94a3b8;">15 Jun 2026</span>
+          </div>
+          <span style="font-size:15px;font-weight:800;color:#10b981;">Rp 15.000</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Rincian Hutang Header</div>
+        <div style="width:100%;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;">
+            <span style="color:#64748b;">Total Hutang:</span>
+            <span style="font-weight:600;color:#ef4444;">Rp 50.000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;">
+            <span style="color:#64748b;">Total Deposit:</span>
+            <span style="font-weight:600;color:#10b981;">Rp 30.000</span>
+          </div>
+          <hr style="margin:10px 0;">
+          <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:700;">
+            <span>Sisa Hutang:</span>
+            <span style="color:#ef4444;">Rp 20.000</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Dashboard Total Piutang</div>
+        <div style="background:white;border-radius:20px;padding:25px 20px;border-left:5px solid #4f46e5;width:100%;">
+          <div style="font-size:13px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">Total Piutang Berjalan</div>
+          <div style="font-size:34px;font-weight:800;color:#1e293b;letter-spacing:-1px;">Rp 500.000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="section">
+    <div class="section-title">🧭 Navigasi Bawah <span class="badge">Bottom Nav</span></div>
+    <div class="card">
+      <div class="bottom-nav-demo">
+        <div class="nav-item-demo active">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          <span>Home</span>
+        </div>
+        <div class="nav-item-demo">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+          <span>Report</span>
+        </div>
+        <div class="nav-item-demo">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <span>Profile</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTIFICATIONS & TOAST -->
+  <div class="section">
+    <div class="section-title">🔔 Notifikasi <span class="badge">Toast & Notif</span></div>
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-label">Toast</div>
+        <div class="demo-area">
+          <div class="toast-demo success">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" width="20" height="20"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>Sync successful!</span>
+          </div>
+          <div class="toast-demo error">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" width="20" height="20"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <span>Login failed</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Notification Card</div>
+        <div class="mobile-frame">
+          <div style="display:flex;background:#f1f5f9;border-radius:12px;padding:4px;margin-bottom:15px;">
+            <button style="flex:1;padding:10px;border:none;background:white;border-radius:8px;font-weight:600;font-size:13px;">Unread <span style="background:#ef4444;color:white;padding:2px 6px;border-radius:10px;font-size:10px;">2</span></button>
+            <button style="flex:1;padding:10px;border:none;background:transparent;border-radius:8px;font-weight:600;font-size:13px;color:#64748b;">Read</button>
+          </div>
+          <div style="background:white;border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center;">
+            <div style="width:35px;height:35px;border-radius:8px;background:#dbeafe;color:#4f46e5;display:flex;align-items:center;justify-content:center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div style="flex:1;">
+              <div style="font-weight:600;font-size:14px;color:#1e293b;">Absensi Baru</div>
+              <div style="font-size:12px;color:#64748b;">Check In - 08:00 AM</div>
+            </div>
+            <span style="font-size:10px;color:#94a3b8;font-weight:500;">Today</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPINNER -->
+  <div class="section">
+    <div class="section-title">⏳ Loading <span class="badge">Spinner</span></div>
+    <div class="grid grid-3">
+      <div class="card" style="text-align:center;">
+        <div class="card-label">Default</div>
+        <div style="display:flex;justify-content:center;padding:20px;">
+          <div class="spinner-demo"></div>
+        </div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="card-label">In Button (White)</div>
+        <div style="display:flex;justify-content:center;padding:20px;">
+          <button class="btn btn-primary" style="width:200px;padding:14px;position:relative;display:flex;align-items:center;justify-content:center;">
+            <div class="spinner-demo" style="border-color:rgba(255,255,255,0.2);border-top-color:white;"></div>
+          </button>
+        </div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="card-label">Splash Screen</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:15px;padding:20px;">
+          <div style="font-size:28px;font-weight:800;letter-spacing:-0.5px;">CODERDY<span style="color:#3b82f6;">.</span></div>
+          <div class="spinner-demo" style="width:32px;height:32px;border-width:3px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHATSAPP SHARE -->
+  <div class="section">
+    <div class="section-title">📤 Tombol Share <span class="badge">WhatsApp</span></div>
+    <div class="card">
+      <div class="demo-area" style="flex-direction:row;">
+        <a href="#" class="wa-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          Share WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- INPUT -->
+  <div class="section">
+    <div class="section-title">✏️ Input <span class="badge">Form Fields</span></div>
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-label">Date Input</div>
+        <div class="demo-area">
+          <div style="display:flex;gap:15px;width:100%;">
+            <div style="flex:1;">
+              <label style="font-size:13px;font-weight:600;color:#1e293b;margin-bottom:6px;display:block;">Start Date</label>
+              <input type="date" class="input-demo" value="2026-06-01">
+            </div>
+            <div style="flex:1;">
+              <label style="font-size:13px;font-weight:600;color:#1e293b;margin-bottom:6px;display:block;">End Date</label>
+              <input type="date" class="input-demo" value="2026-06-15">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Text Input</div>
+        <div class="demo-area">
+          <input type="text" class="input-demo" placeholder="Nama Staff" value="Budi Santoso">
+          <input type="text" class="input-demo" placeholder="Jumlah (Rp)" value="50.000">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WELCOME / DASHBOARD -->
+  <div class="section">
+    <div class="section-title">🏠 Dashboard <span class="badge">Components</span></div>
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="card-label">Welcome Banner</div>
+        <div style="background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:16px;padding:25px;color:white;">
+          <h3 style="font-size:20px;font-weight:700;margin-bottom:5px;">Dashboard Overview</h3>
+          <p style="font-size:14px;opacity:0.8;">Manage your active services and subscriptions.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Menu Item</div>
+        <div style="display:flex;gap:15px;">
+          <div class="menu-item-demo">
+            <div style="width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,#eef2ff,#e0e7ff);color:#4f46e5;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.2 14.2L11 13V7h1.5v5.2l4.5 2.7-.8 1.3z"/></svg>
+            </div>
+            <span style="font-size:13px;font-weight:600;color:#1e293b;">Attendance</span>
+          </div>
+          <div class="menu-item-demo">
+            <div style="width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,#fef3c7,#fde68a);color:#f59e0b;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="26" height="26"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <span style="font-size:13px;font-weight:600;color:#1e293b;">Piutang</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Recent Activity Item</div>
+        <div style="display:flex;align-items:center;gap:12px;padding:10px;background:white;border-radius:12px;width:100%;">
+          <div style="width:35px;height:35px;border-radius:8px;background:#e0e7ff;color:#4f46e5;display:flex;align-items:center;justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div style="flex:1;">
+            <div style="font-weight:600;font-size:14px;color:#1e293b;">Check In</div>
+            <div style="font-size:12px;color:#64748b;">08:00 AM</div>
+          </div>
+          <span style="font-size:12px;color:#94a3b8;">Today</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFILE AVATAR -->
+  <div class="section">
+    <div class="section-title">👤 Profile Avatar <span class="badge">Avatar</span></div>
+    <div class="grid grid-3">
+      <div class="card" style="text-align:center;">
+        <div class="card-label">Default</div>
+        <div style="width:80px;height:80px;border-radius:50%;border:4px solid white;box-shadow:0 10px 25px rgba(0,0,0,0.1);margin:15px auto;background:#e2e8f0;display:flex;align-items:center;justify-content:center;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h4 style="font-size:16px;color:#1e293b;">User Name</h4>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="card-label">With Photo</div>
+        <div style="width:80px;height:80px;border-radius:50%;border:4px solid white;box-shadow:0 10px 25px rgba(0,0,0,0.1);margin:15px auto;overflow:hidden;background:#e2e8f0;">
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#4f46e5,#3b82f6);display:flex;align-items:center;justify-content:center;color:white;font-size:28px;font-weight:800;">B</div>
+        </div>
+        <h4 style="font-size:16px;color:#1e293b;">Budi Santoso</h4>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="card-label">Attendance Clock</div>
+        <div style="font-size:40px;font-weight:800;color:#1e293b;font-variant-numeric:tabular-nums;letter-spacing:-2px;margin-top:15px;">08:00:00</div>
+        <div style="font-size:13px;color:#64748b;font-weight:600;">Monday, 15 June 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPACING & SHADOW -->
+  <div class="section">
+    <div class="section-title">📐 Spacing & Shadow <span class="badge">Tokens</span></div>
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="card-label">Border Radius</div>
+        <div class="demo-area" style="flex-direction:row;">
+          <div style="width:50px;height:50px;background:#e2e8f0;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;">8px</div>
+          <div style="width:50px;height:50px;background:#e2e8f0;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:10px;">12px</div>
+          <div style="width:50px;height:50px;background:#e2e8f0;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:10px;">14px</div>
+          <div style="width:50px;height:50px;background:#e2e8f0;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:10px;">16px</div>
+          <div style="width:50px;height:50px;background:#e2e8f0;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:10px;">20px</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Shadows</div>
+        <div class="demo-area" style="flex-direction:row;">
+          <div style="width:60px;height:60px;background:white;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.03);"></div>
+          <div style="width:60px;height:60px;background:white;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.03);"></div>
+          <div style="width:60px;height:60px;background:white;border-radius:12px;box-shadow:0 20px 40px rgba(0,0,0,0.15);"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Padding</div>
+        <div class="demo-area" style="flex-direction:row;">
+          <div style="background:#eef2ff;border-radius:8px;padding:10px;font-size:12px;">10px</div>
+          <div style="background:#eef2ff;border-radius:8px;padding:14px;font-size:12px;">14px</div>
+          <div style="background:#eef2ff;border-radius:8px;padding:20px;font-size:12px;">20px</div>
+          <div style="background:#eef2ff;border-radius:8px;padding:25px;font-size:12px;">25px</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <p style="text-align:center;color:#94a3b8;font-size:13px;padding:20px 0;">
+    CODERDY UI Kit — v1.0 · Dibuat manual dari komponen yang dipake di aplikasi
+  </p>
+</div>
+</body>
+</html>
